@@ -82,7 +82,7 @@ test -d "${REPS_DIR}" || mkdir -p "${REPS_DIR}"
 test -d "${BUILD_DIR}" || mkdir -p "${BUILD_DIR}"
 
 cd "${REPS_DIR}" || exit 1
-test -d "${REPS_DIR}/lang" || mkdir -p "${BUILD_DIR}/lang"
+test -d "${REPS_DIR}/lang" || mkdir -p "${REPS_DIR}/lang"
 cd "${REPS_DIR}/lang" || exit 1
 for _lang in "${INSTALL_TESSDATA[@]}"
 do
