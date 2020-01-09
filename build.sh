@@ -24,7 +24,7 @@ LANG_TESSDATA=("afr" "amh" "ara" "asm" "aze_cyrl" "aze" "bel" "ben" "bod" \
                "spa" "sqi" "srp_latn" "srp" "sun" "swa" "swe" "syr" "tam" \
                "tat" "tel" "tgk" "tha" "tir" "ton" "tur" "uig" "ukr" "urd" \
                "uzb_cyrl" "uzb" "vie" "yid" "yor")
-INSTALL_TESSDATA=("eng" "equ" "osd")
+INSTALL_TESSDATA=("eng" "osd")
 BRANCH="master"
 
 
