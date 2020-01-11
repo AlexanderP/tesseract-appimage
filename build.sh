@@ -169,7 +169,7 @@ StartupNotify=true
 Categories=Office;
 EOF
 
-cp "${DIR}/tesseract.svg" "AppDir/"
+cp "${DIR}/tesseract.png" "AppDir/"
 
 cat >> "AppDir/AppRun" << EOF
 #!/bin/bash
