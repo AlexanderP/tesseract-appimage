@@ -14,6 +14,6 @@ The tesseract-ocr AppImage is built on Ubuntu 16.04, using Docker container that
 1. Create Docker image:   
     `docker build -t tess_buildenv .`
 2. Run build.sh:   
-    `docker run --rm -v $PWD:/build --device=/dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined tess_buildenv_14.04 bash build.sh -l "spa fin por fra rus deu"`
+    `docker run --rm -v $PWD:/build --device=/dev/fuse --cap-add SYS_ADMIN --security-opt apparmor:unconfined tess_buildenv bash build.sh -l "spa fin por fra rus deu"`
 3. Run AppImage:   
     `./tesseract*.AppImage Apache.tif -`
