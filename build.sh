@@ -44,7 +44,7 @@ get_tessdata(){
     fi
 }
 
-while getopts "l:b:n" Option
+while getopts "l:n" Option
 do
     case $Option in
         l) 
@@ -62,16 +62,16 @@ do
             fi
         done
         ;;
-        b) BRANCH=${OPTARG} ;;
         n) BUILD="False" ;;
     esac
 done
 shift $((OPTIND - 1))
 
+BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/^\* //')
+
 case ${BRANCH} in
-    4.1)
+    4.x)
         _TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00
-        GIT_URL="-b 4.1 ${GIT_URL}"
     ;;
     *)
         _TESSDATA_PREFIX=/usr/share/tesseract-ocr/5
@@ -123,7 +123,7 @@ fi
 TESSDATA_PREFIX=${REPS_DIR}/lang
 export TESSDATA_PREFIX
 case ${BRANCH} in
-    4.1)
+    4.x)
         ./src/api/tesseract -v || exit 1
         ./src/api/tesseract ./test/testing/phototest.tif - || exit 1
     ;;
