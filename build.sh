@@ -56,6 +56,9 @@ do
             elif printf '%s\n' "${SCRIPT_TESSDATA[@]}" | grep -q "^${_lang}$"
             then
                 INSTALL_TESSDATA=( "${INSTALL_TESSDATA[@]}" "${_lang}")
+            elif echo "all" | grep -q "^${_lang}$"
+            then
+                INSTALL_TESSDATA=("${SCRIPT_TESSDATA[@]}" "${LANG_TESSDATA[@]}")
             else
                 echo "Неизвестный traineddata файл - ${_lang}"
                 exit 1
