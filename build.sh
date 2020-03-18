@@ -25,8 +25,6 @@ LANG_TESSDATA=("afr" "amh" "ara" "asm" "aze_cyrl" "aze" "bel" "ben" "bod" \
                "tat" "tel" "tgk" "tha" "tir" "ton" "tur" "uig" "ukr" "urd" \
                "uzb_cyrl" "uzb" "vie" "yid" "yor")
 INSTALL_TESSDATA=("eng" "osd")
-BRANCH="master"
-
 
 get_tessdata(){
     if test ! -f "${1}.traineddata"
@@ -70,17 +68,6 @@ do
 done
 shift $((OPTIND - 1))
 
-BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/^\* //')
-
-case ${BRANCH} in
-    4.x)
-        _TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00
-    ;;
-    *)
-        _TESSDATA_PREFIX=/usr/share/tesseract-ocr/5
-    ;;
-esac
-
 test -d "${REPS_DIR}" || mkdir -p "${REPS_DIR}"
 test -d "${BUILD_DIR}" || mkdir -p "${BUILD_DIR}"
 
@@ -96,6 +83,14 @@ cd "${DIR}/tesseract" || exit 1
 VERSION="$(git describe --abbrev=4)"
 export VERSION
 
+case ${VERSION} in
+    4*)
+        _TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00
+    ;;
+    *)
+        _TESSDATA_PREFIX=/usr/share/tesseract-ocr/5
+    ;;
+esac
 
 if [[ ${BUILD} == "False" ]]
 then
@@ -125,8 +120,8 @@ fi
 
 TESSDATA_PREFIX=${REPS_DIR}/lang
 export TESSDATA_PREFIX
-case ${BRANCH} in
-    4.x)
+case ${VERSION} in
+    4*)
         ./src/api/tesseract -v || exit 1
         ./src/api/tesseract ./test/testing/phototest.tif - || exit 1
     ;;
