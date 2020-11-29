@@ -9,7 +9,7 @@ green_n() { echo -en "\\e[1;32m$1\\e[0;39;49m"; }
 DIST=("centos_7" "centos_8" "debian_8" "debian_9" "debian_10" "debian_11" \
       "fedora_29" "fedora_30" "fedora_31" "fedora_32" "ubuntu_14.04" "ubuntu_16.04" \
       "ubuntu_18.04" "ubuntu_19.10" "ubuntu_20.04" "opensuse_15.0" "opensuse_15.1" \
-      "opensuse_15.2" "opensuse_42" "opensuse_tumbleweed")
+      "opensuse_15.2" "opensuse_42" "opensuse_tumbleweed" "fedora_33" "ubuntu_20.10")
 
 
 create_images(){
