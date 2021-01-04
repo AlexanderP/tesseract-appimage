@@ -25,6 +25,27 @@ LANG_TESSDATA=("afr" "amh" "ara" "asm" "aze_cyrl" "aze" "bel" "ben" "bod" \
                "tat" "tel" "tgk" "tha" "tir" "ton" "tur" "uig" "ukr" "urd" \
                "uzb_cyrl" "uzb" "vie" "yid" "yor")
 INSTALL_TESSDATA=("eng" "osd")
+LIB="/usr/lib/x86_64-linux-gnu/libarchive.so.13
+     /lib/x86_64-linux-gnu/libattr.so.1\
+     /lib/x86_64-linux-gnu/libbz2.so.1.0\
+     /usr/lib/x86_64-linux-gnu/libgif.so.7\
+     /usr/lib/x86_64-linux-gnu/libgomp.so.1\
+     /usr/lib/x86_64-linux-gnu/libicudata.so.60 \
+     /usr/lib/x86_64-linux-gnu/libicuuc.so.60\
+     /usr/lib/x86_64-linux-gnu/libjbig.so.0\
+     /usr/lib/x86_64-linux-gnu/libjpeg.so.8\
+     /usr/lib/x86_64-linux-gnu/liblept.so.5\
+     /lib/x86_64-linux-gnu/liblzma.so.5 \
+     /lib/x86_64-linux-gnu/liblzo2.so.2\
+     /usr/lib/x86_64-linux-gnu/libnettle.so.6\
+     /usr/lib/x86_64-linux-gnu/libopenjp2.so.7\
+     /usr/lib/x86_64-linux-gnu/libpng16.so.16 \
+     /usr/lib/x86_64-linux-gnu/libtiff.so.5\
+     /usr/lib/x86_64-linux-gnu/libwebp.so.6\
+     /usr/lib/x86_64-linux-gnu/libxml2.so.2\
+     /lib/x86_64-linux-gnu/libz.so.1
+     /lib/x86_64-linux-gnu/libacl.so.1\
+     /usr/lib/x86_64-linux-gnu/liblz4.so.1"
 
 get_tessdata(){
     if test ! -f "${1}.traineddata"
@@ -132,11 +153,11 @@ case ${VERSION} in
 esac
 unset TESSDATA_PREFIX
 
-if test ! -f linuxdeployqt-continuous-x86_64.AppImage
-then
-    wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
-    chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-fi
+#if test ! -f linuxdeployqt-continuous-x86_64.AppImage
+#then
+#    wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+#    chmod a+x linuxdeployqt-continuous-x86_64.AppImage
+#fi
 
 test ! -d AppDir || rm -rf AppDir
 make install DESTDIR="$(pwd)/AppDir"
@@ -167,7 +188,12 @@ StartupNotify=true
 Categories=Office;
 EOF
 
-cp "${DIR}/tesseract.png" "AppDir/"
+#mkdir -p AppDir/usr/share/icons/256x256
+#cp "${DIR}/tesseract.png" "AppDir/usr/share/icons/256x256/"
+#cp ${DIR}/AppImageBuilder.yml .
+
+cp "${DIR}/tesseract.png" "AppDir"
+
 
 cat >> "AppDir/AppRun" << EOF
 #!/bin/bash
@@ -191,9 +217,18 @@ EOF
 
 chmod +x AppDir/AppRun
 
+#ldd AppDir/usr/bin/tesseract
+
+for i in $LIB
+do
+  cp "${i}" "$(pwd)/AppDir/usr/lib" || exit 1
+done
+
 LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$(pwd)/AppDir/usr/lib"
 export LD_LIBRARY_PATH
 
-./linuxdeployqt-continuous-x86_64.AppImage AppDir/tesseract-env.desktop -appimage
+#ldd AppDir/usr/bin/tesseract
+
+appimagetool AppDir
 
 cp tesseract-${VERSION}-x86_64.AppImage ${DIR}
