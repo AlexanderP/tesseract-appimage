@@ -52,10 +52,10 @@ get_tessdata(){
     then
         if printf '%s\n' "${LANG_TESSDATA[@]}" | grep -q "^${1}$"
         then
-            wget -c "https://github.com/tesseract-ocr/tessdata_fast/raw/master/${1}.traineddata"
+            wget -c "https://github.com/tesseract-ocr/tessdata_fast/raw/main/${1}.traineddata"
         elif printf '%s\n' "${SCRIPT_TESSDATA[@]}" | grep -q "^${1}$"
         then
-            wget -c "https://github.com/tesseract-ocr/tessdata_fast/raw/master/script/${1}.traineddata"
+            wget -c "https://github.com/tesseract-ocr/tessdata_fast/raw/main/script/${1}.traineddata"
         else
             echo "Неизвестный файл - ${1}.traineddata"
             exit 1
@@ -122,20 +122,15 @@ else
     cd "${BUILD_DIR}" || exit 1
     cp -r "${DIR}/tesseract" ${BUILD_DIR}/ || exit 1
     cd tesseract || exit 1
-    CFLAGS="$(dpkg-buildflags --get CFLAGS) -Wall -g \
-                -fPIC -DTESSDATA_PREFIX=${_TESSDATA_PREFIX}"
-    LDFLAGS=$(dpkg-buildflags --get LDFLAGS)
-    DEB_HOST_GNU_TYPE=$(dpkg-architecture -qDEB_HOST_GNU_TYPE)
-    DEB_BUILD_GNU_TYPE=$(dpkg-architecture -qDEB_BUILD_GNU_TYPE)
-    export CFLAGS LDFLAGS DEB_HOST_GNU_TYPE DEB_BUILD_GNU_TYPE
     echo ${VERSION} > VERSION
     ./autogen.sh
-    ./configure --host="${DEB_HOST_GNU_TYPE}" \
-                --build="${DEB_BUILD_GNU_TYPE}" \
+    ./configure --host="$(dpkg-architecture -qDEB_HOST_GNU_TYPE)" \
+                --build="$(dpkg-architecture -qDEB_BUILD_GNU_TYPE)" \
                 --disable-tessdata-prefix --prefix=/usr \
                 --mandir=/usr/share/man \
                 --infodir=/usr/share/info \
-                CXXFLAGS="${CFLAGS}" LDFLAGS="-llept -Wl,-z,defs ${LDFLAGS}"
+                CXXFLAGS="$(dpkg-buildflags --get CFLAGS) -Wall -g -fPIC -DTESSDATA_PREFIX='\"${_TESSDATA_PREFIX}\"'" \
+                LDFLAGS="-llept -Wl,-z,defs $(dpkg-buildflags --get LDFLAGS)"
     make -j10
 fi
 
