@@ -10,7 +10,7 @@ DIST=("centos_7" "centos_8" "debian_8" "debian_9" "debian_10" "debian_11" \
       "fedora_29" "fedora_30" "fedora_31" "fedora_32" "ubuntu_14.04" "ubuntu_16.04" \
       "ubuntu_18.04" "ubuntu_20.04" "opensuse_15.0" "opensuse_15.1" \
       "opensuse_15.2" "opensuse_42" "opensuse_tumbleweed" "fedora_33" "ubuntu_20.10" \
-      "ubuntu_21.04" "fedora_34")
+      "ubuntu_21.04" "fedora_34" "fedora_35" "ubuntu_21.10" "opensuse_15.3")
 
 
 create_images(){
