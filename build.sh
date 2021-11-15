@@ -33,10 +33,10 @@ get_tessdata(){
     then
         if printf '%s\n' "${LANG_TESSDATA[@]}" | grep -q "^${1}$"
         then
-            wget -c "https://github.com/tesseract-ocr/tessdata_fast/raw/master/${1}.traineddata"
+            wget -c "https://github.com/tesseract-ocr/tessdata_fast/raw/main/${1}.traineddata"
         elif printf '%s\n' "${SCRIPT_TESSDATA[@]}" | grep -q "^${1}$"
         then
-            wget -c "https://github.com/tesseract-ocr/tessdata_fast/raw/master/script/${1}.traineddata"
+            wget -c "https://github.com/tesseract-ocr/tessdata_fast/raw/main/script/${1}.traineddata"
         else
             echo "Неизвестный файл - ${1}.traineddata"
             exit 1
@@ -137,10 +137,10 @@ case ${BRANCH} in
 esac
 unset TESSDATA_PREFIX
 
-if test ! -f linuxdeployqt-continuous-x86_64.AppImage
+if test ! -f linuxdeployqt-7-x86_64.AppImage
 then
-    wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
-    chmod a+x linuxdeployqt-continuous-x86_64.AppImage
+    wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/7/linuxdeployqt-7-x86_64.AppImage"
+    chmod a+x linuxdeployqt-7-x86_64.AppImage
 fi
 
 test ! -d AppDir || rm -rf AppDir
@@ -199,6 +199,6 @@ chmod +x AppDir/AppRun
 LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$(pwd)/AppDir/usr/lib"
 export LD_LIBRARY_PATH
 
-./linuxdeployqt-continuous-x86_64.AppImage AppDir/tesseract-env.desktop -appimage
+./linuxdeployqt-7-x86_64.AppImage AppDir/tesseract-env.desktop -appimage
 
 cp tesseract-${VERSION}-x86_64.AppImage ${DIR}
