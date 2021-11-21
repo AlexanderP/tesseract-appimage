@@ -137,10 +137,10 @@ case ${BRANCH} in
 esac
 unset TESSDATA_PREFIX
 
-if test ! -f linuxdeployqt-7-x86_64.AppImage
+if test ! -f linuxdeployqt-continuous-x86_64.AppImage
 then
-    wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/7/linuxdeployqt-7-x86_64.AppImage"
-    chmod a+x linuxdeployqt-7-x86_64.AppImage
+    wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+    chmod a+x linuxdeployqt-continuous-x86_64.AppImage
 fi
 
 test ! -d AppDir || rm -rf AppDir
@@ -199,6 +199,6 @@ chmod +x AppDir/AppRun
 LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$(pwd)/AppDir/usr/lib"
 export LD_LIBRARY_PATH
 
-./linuxdeployqt-7-x86_64.AppImage AppDir/tesseract-env.desktop -appimage
+./linuxdeployqt-continuous-x86_64.AppImage AppDir/tesseract-env.desktop -appimage
 
 cp tesseract-${VERSION}-x86_64.AppImage ${DIR}
