@@ -122,7 +122,7 @@ else
     cd "${BUILD_DIR}" || exit 1
     cp -r "${DIR}/tesseract" ${BUILD_DIR}/ || exit 1
     cd tesseract || exit 1
-    echo ${VERSION} > VERSION
+#    echo ${VERSION} > VERSION
     ./autogen.sh
     ./configure --host="$(dpkg-architecture -qDEB_HOST_GNU_TYPE)" \
                 --build="$(dpkg-architecture -qDEB_BUILD_GNU_TYPE)" \
