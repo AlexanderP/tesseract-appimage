@@ -1,4 +1,4 @@
-FROM centos:centos8
+FROM almalinux:8
 RUN yum update -y
 RUN yum -y install fuse fuse-libs
 
