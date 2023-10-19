@@ -30,14 +30,14 @@ LIB="/usr/lib/x86_64-linux-gnu/libarchive.so.13
      /lib/x86_64-linux-gnu/libbz2.so.1.0\
      /usr/lib/x86_64-linux-gnu/libgif.so.7\
      /usr/lib/x86_64-linux-gnu/libgomp.so.1\
-     /usr/lib/x86_64-linux-gnu/libicudata.so.60 \
-     /usr/lib/x86_64-linux-gnu/libicuuc.so.60\
+     /usr/lib/x86_64-linux-gnu/libicudata.so.66 \
+     /usr/lib/x86_64-linux-gnu/libicuuc.so.66\
      /usr/lib/x86_64-linux-gnu/libjbig.so.0\
      /usr/lib/x86_64-linux-gnu/libjpeg.so.8\
      /usr/lib/x86_64-linux-gnu/liblept.so.5\
      /lib/x86_64-linux-gnu/liblzma.so.5 \
      /lib/x86_64-linux-gnu/liblzo2.so.2\
-     /usr/lib/x86_64-linux-gnu/libnettle.so.6\
+     /usr/lib/x86_64-linux-gnu/libnettle.so.7\
      /usr/lib/x86_64-linux-gnu/libopenjp2.so.7\
      /usr/lib/x86_64-linux-gnu/libpng16.so.16 \
      /usr/lib/x86_64-linux-gnu/libtiff.so.5\
