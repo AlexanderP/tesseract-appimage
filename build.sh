@@ -45,7 +45,8 @@ LIB="/usr/lib/x86_64-linux-gnu/libarchive.so.13
      /usr/lib/x86_64-linux-gnu/libxml2.so.2\
      /lib/x86_64-linux-gnu/libz.so.1
      /lib/x86_64-linux-gnu/libacl.so.1\
-     /usr/lib/x86_64-linux-gnu/liblz4.so.1"
+     /usr/lib/x86_64-linux-gnu/liblz4.so.1\
+     /usr/lib/x86_64-linux-gnu/libwebpmux.so.3"
 
 get_tessdata(){
     if test ! -f "${1}.traineddata"

@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bookworm
 RUN apt-get update && apt-get dist-upgrade -y
 RUN apt-get install -y libfuse2 fuse
 

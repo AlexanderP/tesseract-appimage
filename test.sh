@@ -6,12 +6,29 @@ green() { echo -e "\\e[1;32m$1\\e[0;39;49m"; }
 red() { echo -e "\\e[1;31m$1\\e[0;39;49m"; }
 blue() { echo -e "\\e[1;34m$1\\e[0;39;49m"; }
 green_n() { echo -en "\\e[1;32m$1\\e[0;39;49m"; }
-DIST=("centos_7" "almalinux_8" "almalinux_9" "debian_8" "debian_9" "debian_10" "debian_11" \
-      "fedora_29" "fedora_30" "fedora_31" "fedora_32" "ubuntu_14.04" "ubuntu_16.04" \
-      "ubuntu_18.04" "ubuntu_20.04" "ubuntu_22.04" "opensuse_15.0" "opensuse_15.1" \
-      "opensuse_15.2" "opensuse_tumbleweed" "fedora_33" \
-      "fedora_34" "fedora_35" "fedora_36" "opensuse_15.3" "opensuse_15.4"\
-      "fedora_37" "ubuntu_22.10")
+DIST=("almalinux_8" \
+      "almalinux_9" \
+      "debian_10" \
+      "debian_11" \
+      "debian_12" \
+      "fedora_29" \
+      "fedora_30" \
+      "fedora_31" \
+      "fedora_32" \
+      "fedora_33" \
+      "fedora_34" \
+      "fedora_35" \
+      "fedora_36" \
+      "fedora_37" \
+      "fedora_38" \
+      "ubuntu_20.04" \
+      "ubuntu_22.04" \
+      "ubuntu_23.04" \
+      "ubuntu_23.10" \
+      "opensuse_15.3" \
+      "opensuse_15.4" \
+      "opensuse_15.5"\
+      "opensuse_tumbleweed" )
 
 
 create_images(){
