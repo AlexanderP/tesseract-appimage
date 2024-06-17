@@ -15,19 +15,17 @@ DIST=("almalinux_8" \
       "fedora_30" \
       "fedora_31" \
       "fedora_32" \
-      "fedora_33" \
-      "fedora_34" \
-      "fedora_35" \
-      "fedora_36" \
-      "fedora_37" \
       "fedora_38" \
+      "fedora_39" \
+      "fedora_40" \
       "ubuntu_20.04" \
       "ubuntu_22.04" \
-      "ubuntu_23.04" \
+      "ubuntu_24.04" \
       "ubuntu_23.10" \
       "opensuse_15.3" \
       "opensuse_15.4" \
       "opensuse_15.5"\
+      "opensuse_15.6"\
       "opensuse_tumbleweed" )
 
 
@@ -96,6 +94,6 @@ test_teseeract(){
     done
 }
 
-#create_images
+create_images
 #rm_images
-test_teseeract "$1"
+#test_teseeract "$1"
