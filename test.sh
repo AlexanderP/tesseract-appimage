@@ -94,6 +94,6 @@ test_teseeract(){
     done
 }
 
-create_images
+#create_images
 #rm_images
-#test_teseeract "$1"
+test_teseeract "$1"
