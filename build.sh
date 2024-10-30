@@ -191,11 +191,11 @@ EOF
 
 chmod +x AppDir/AppRun
 
-patchelf --set-rpath '$ORIGIN/../lib' ./usr/bin/tesseract
+patchelf --set-rpath '$ORIGIN/../lib' AppDir/usr/bin/tesseract
 
-ldd ./usr/bin/tesseract | awk -F"[> ]" '{print $4}' | xargs -I {} cp -f {} ./usr/lib
-mv ./usr/lib/ld-linux-x86-64.so.2 ./ || exit 1
-find /lib /usr/lib -type f -name 'libtiff.so.5' -exec cp {} ./usr/lib
+ldd AppDir/usr/bin/tesseract | awk -F"[> ]" '{print $4}' | xargs -I {} cp -f {} AppDir/usr/lib
+mv AppDir/usr/lib/ld-linux-x86-64.so.2 AppDir || exit 1
+find /lib /usr/lib -type f -name 'libtiff.so.5' -exec cp {} AppDir/usr/lib
 
 patchelf --set-rpath '$ORIGIN' ./usr/lib/*
 
