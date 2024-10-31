@@ -102,7 +102,6 @@ else
     cd "${BUILD_DIR}" || exit 1
     cp -r "${DIR}/tesseract" ${BUILD_DIR}/ || exit 1
     cd tesseract || exit 1
-#    echo ${VERSION} > VERSION
     ./autogen.sh
     ./configure --host="$(dpkg-architecture -qDEB_HOST_GNU_TYPE)" \
                 --build="$(dpkg-architecture -qDEB_BUILD_GNU_TYPE)" \
@@ -128,11 +127,6 @@ case ${VERSION} in
 esac
 unset TESSDATA_PREFIX
 
-#if test ! -f linuxdeployqt-continuous-x86_64.AppImage
-#then
-#    wget -c "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
-#    chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-#fi
 
 test ! -d AppDir || rm -rf AppDir
 make install DESTDIR="$(pwd)/AppDir"
@@ -163,9 +157,6 @@ StartupNotify=true
 Categories=Office;
 EOF
 
-#mkdir -p AppDir/usr/share/icons/256x256
-#cp "${DIR}/tesseract.png" "AppDir/usr/share/icons/256x256/"
-#cp ${DIR}/AppImageBuilder.yml .
 
 cp "${DIR}/tesseract.png" "AppDir"
 
