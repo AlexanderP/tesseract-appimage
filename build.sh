@@ -25,28 +25,7 @@ LANG_TESSDATA=("afr" "amh" "ara" "asm" "aze_cyrl" "aze" "bel" "ben" "bod" \
                "tat" "tel" "tgk" "tha" "tir" "ton" "tur" "uig" "ukr" "urd" \
                "uzb_cyrl" "uzb" "vie" "yid" "yor")
 INSTALL_TESSDATA=("eng" "osd")
-LIB="/usr/lib/x86_64-linux-gnu/libarchive.so.13
-     /lib/x86_64-linux-gnu/libattr.so.1\
-     /lib/x86_64-linux-gnu/libbz2.so.1.0\
-     /usr/lib/x86_64-linux-gnu/libgif.so.7\
-     /usr/lib/x86_64-linux-gnu/libgomp.so.1\
-     /usr/lib/x86_64-linux-gnu/libicudata.so.66 \
-     /usr/lib/x86_64-linux-gnu/libicuuc.so.66\
-     /usr/lib/x86_64-linux-gnu/libjbig.so.0\
-     /usr/lib/x86_64-linux-gnu/libjpeg.so.8\
-     /usr/lib/x86_64-linux-gnu/liblept.so.5\
-     /lib/x86_64-linux-gnu/liblzma.so.5 \
-     /lib/x86_64-linux-gnu/liblzo2.so.2\
-     /usr/lib/x86_64-linux-gnu/libnettle.so.7\
-     /usr/lib/x86_64-linux-gnu/libopenjp2.so.7\
-     /usr/lib/x86_64-linux-gnu/libpng16.so.16 \
-     /usr/lib/x86_64-linux-gnu/libtiff.so.5\
-     /usr/lib/x86_64-linux-gnu/libwebp.so.6\
-     /usr/lib/x86_64-linux-gnu/libxml2.so.2\
-     /lib/x86_64-linux-gnu/libz.so.1
-     /lib/x86_64-linux-gnu/libacl.so.1\
-     /usr/lib/x86_64-linux-gnu/liblz4.so.1\
-     /usr/lib/x86_64-linux-gnu/libwebpmux.so.3"
+
 
 get_tessdata(){
     if test ! -f "${1}.traineddata"
@@ -67,7 +46,7 @@ get_tessdata(){
 while getopts "l:n" Option
 do
     case $Option in
-        l) 
+        l)
         for _lang in $OPTARG
         do
             if printf '%s\n' "${LANG_TESSDATA[@]}" | grep -q "^${_lang}$"
@@ -195,35 +174,35 @@ cat >> "AppDir/AppRun" << EOF
 #!/bin/bash
 HERE="\$(dirname "\$(readlink -f "\${0}")")"
 
-export LD_LIBRARY_PATH=\${HERE}/usr/lib:\$LD_LIBRARY_PATH
-
-if [ -z "\$TESSDATA_PREFIX" ]
-then
+if [ -z "\$TESSDATA_PREFIX" ]; then
     export TESSDATA_PREFIX=\${HERE}${_TESSDATA_PREFIX}/tessdata
 fi
 
-if [ ! -z \$APPIMAGE ] ; then
-  BINARY_NAME=\$(basename "\$ARGV0")
+if [ ! -z \$APPIMAGE ]; then
+  BINARY_NAME=\$(basename "\${ARGV0#./}")
 else
   BINARY_NAME=\$(basename "\$0")
 fi
 
-exec "\${HERE}/usr/bin/tesseract" "\$@"
+unset ARGV0
+
+exec "\${HERE}/ld-linux-x86-64.so.2" "\${HERE}/usr/bin/tesseract" "\$@"
 EOF
 
 chmod +x AppDir/AppRun
 
-#ldd AppDir/usr/bin/tesseract
+patchelf --set-rpath '$ORIGIN/../lib' AppDir/usr/bin/tesseract || exit 1
 
-for i in $LIB
-do
-  cp "${i}" "$(pwd)/AppDir/usr/lib" || exit 1
-done
+ldd AppDir/usr/bin/tesseract | awk -F"[> ]" '{print $4}' | xargs -I {} cp -vf {} AppDir/usr/lib
+mv AppDir/usr/lib/ld-linux-x86-64.so.2 AppDir 2>/dev/null || true
 
-LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$(pwd)/AppDir/usr/lib"
-export LD_LIBRARY_PATH
+if [ ! -f AppDir/ld-linux-x86-64.so.2 ]; then
+    cp -v /lib64/ld-linux-x86-64.so.2 AppDir || exit 1
+fi
 
-#ldd AppDir/usr/bin/tesseract
+cp -v /usr/lib/x86_64-linux-gnu/libtiff.so.5 AppDir/usr/lib || exit 1
+
+patchelf --set-rpath '$ORIGIN' AppDir/usr/lib/lib* || exit 1
 
 appimagetool AppDir
 
