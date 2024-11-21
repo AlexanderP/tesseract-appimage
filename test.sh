@@ -31,7 +31,7 @@ DIST=("almalinux_8" \
       "opensuse_15.5"\
       "opensuse_15.6"\
       "opensuse_tumbleweed" )
-
+PICTURE="Apache.gif Apache.jpg Apache.png Apache.tif Apache.webp"
 
 create_images(){
     for _images in "${DIST[@]}" ; do
@@ -84,12 +84,17 @@ test_teseeract(){
         test ! -f "${log_file}" || rm "${log_file}" && touch "${log_file}"
         if docker images | grep -q "${_images}"
         then
+            echo -e "Проверка версии\n" >> "${log_file}"
             green_n "Проверка версии                    "
             docker_run "tess_${_images}" "${1}" -v
             green_n "Проверка списка языков             "
+            echo -e "\nПроверка списка языков\n" >> "${log_file}"
             docker_run "tess_${_images}" "${1}" --list-langs
-            green_n "Проверка распознавания             "
-            docker_run "tess_${_images}" "${1}" Apache.tif -
+            for _picture in ${PICTURE}; do
+                echo -e "\nПроверка распознавания ${_picture}\n" >> "${log_file}"
+                green_n "Проверка распознавания ${_picture}  "
+                docker_run "tess_${_images}" "${1}" ${_picture} -
+            done
         else
             red "Образ ${_images} несуществует "
         fi
