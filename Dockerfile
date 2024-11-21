@@ -1,8 +1,6 @@
-FROM ubuntu:20.04
+FROM debian:trixie
 
 RUN apt update
-RUN DEBIAN_FRONTEND=noninteractive apt install -y software-properties-common
-RUN add-apt-repository -y ppa:alex-p/tesseract-ocr
 RUN DEBIAN_FRONTEND=noninteractive apt install -y patchelf desktop-file-utils debhelper libleptonica-dev automake libtool libarchive-dev libpango1.0-dev libcairo2-dev libicu-dev libpng-dev libjpeg-dev libtiff-dev zlib1g-dev git asciidoc xsltproc docbook-xsl docbook-xml wget libfuse2 fuse
 
 RUN DEBIAN_FRONTEND=noninteractive apt install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot wget

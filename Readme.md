@@ -1,5 +1,5 @@
 # Introduction
-The tesseract-ocr AppImage is built on Ubuntu 18.04, using Docker container that provides all the required up-to-date dependencies.
+The tesseract-ocr AppImage is built on Debian 13, using Docker container that provides all the required up-to-date dependencies.
 
 # Instruction
 1. Download AppImage from [releases](https://github.com/AlexanderP/tesseract-appimage/releases) page

@@ -25,7 +25,7 @@ LANG_TESSDATA=("afr" "amh" "ara" "asm" "aze_cyrl" "aze" "bel" "ben" "bod" \
                "tat" "tel" "tgk" "tha" "tir" "ton" "tur" "uig" "ukr" "urd" \
                "uzb_cyrl" "uzb" "vie" "yid" "yor")
 INSTALL_TESSDATA=("eng" "osd")
-export VERSION=5.5.0
+export VERSION=5.5.0_lept6
 
 get_tessdata(){
     if test ! -f "${1}.traineddata"
@@ -107,7 +107,7 @@ else
                 --mandir=/usr/share/man \
                 --infodir=/usr/share/info \
                 CXXFLAGS="$(dpkg-buildflags --get CFLAGS) -Wall -g -fPIC -DTESSDATA_PREFIX='\"${_TESSDATA_PREFIX}\"'" \
-                LDFLAGS="-llept -Wl,-z,defs $(dpkg-buildflags --get LDFLAGS)"
+                LDFLAGS="-lleptonica -Wl,-z,defs $(dpkg-buildflags --get LDFLAGS)"
     make -j10
 fi
 
@@ -189,7 +189,7 @@ if [ ! -f AppDir/ld-linux-x86-64.so.2 ]; then
     cp -v /lib64/ld-linux-x86-64.so.2 AppDir || exit 1
 fi
 
-cp -v /usr/lib/x86_64-linux-gnu/libtiff.so.5 AppDir/usr/lib || exit 1
+#cp -v /usr/lib/x86_64-linux-gnu/libtiff.so.5 AppDir/usr/lib || exit 1
 
 patchelf --set-rpath '$ORIGIN' AppDir/usr/lib/lib* || exit 1
 
