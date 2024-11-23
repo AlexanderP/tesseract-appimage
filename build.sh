@@ -132,6 +132,9 @@ make install DESTDIR="$(pwd)/AppDir"
 rm -rf AppDir/usr/include AppDir/usr/lib/pkgconfig \
        AppDir/usr/lib/*.la AppDir/usr/lib/*.a
 
+strip --remove-section=.comment --remove-section=.note --strip-unneeded AppDir/usr/lib/libtesseract.so.5.* || exit 1
+strip --remove-section=.comment --remove-section=.note AppDir/usr/bin/tesseract || exit 1
+
 mkdir -p AppDir${_TESSDATA_PREFIX}
 mv AppDir/usr/share/tessdata AppDir${_TESSDATA_PREFIX}
 for _lang in "${INSTALL_TESSDATA[@]}"
