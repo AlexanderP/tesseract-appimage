@@ -25,7 +25,8 @@ LANG_TESSDATA=("afr" "amh" "ara" "asm" "aze_cyrl" "aze" "bel" "ben" "bod" \
                "tat" "tel" "tgk" "tha" "tir" "ton" "tur" "uig" "ukr" "urd" \
                "uzb_cyrl" "uzb" "vie" "yid" "yor")
 INSTALL_TESSDATA=("eng" "osd")
-export VERSION=5.5.0_lept6
+export VERSION=5.5.0_lept-1.85
+export VERSION_LEPTONICA=1.85.0
 
 get_tessdata(){
     if test ! -f "${1}.traineddata"
@@ -71,7 +72,19 @@ shift $((OPTIND - 1))
 
 test -d "${REPS_DIR}" || mkdir -p "${REPS_DIR}"
 test -d "${BUILD_DIR}" || mkdir -p "${BUILD_DIR}"
-
+########## build leptonica ##########
+rm -rf "${BUILD_DIR}/lept" || exit 1
+test -d "${BUILD_DIR}/lept" || mkdir -p "${BUILD_DIR}/lept"
+cp -r "${DIR}/leptonica" "${BUILD_DIR}/lept/leptonlib-${VERSION_LEPTONICA}"
+cd "${BUILD_DIR}/lept" || exit 1
+tar -cpf "leptonlib_${VERSION_LEPTONICA}.orig.tar" "leptonlib-${VERSION_LEPTONICA}"
+xz -9 "leptonlib_${VERSION_LEPTONICA}.orig.tar"
+cp -r "${DIR}/debian-leptonlib" "${BUILD_DIR}/lept/leptonlib-${VERSION_LEPTONICA}/debian"
+cd "${BUILD_DIR}/lept/leptonlib-${VERSION_LEPTONICA}" || exit 1
+debuild || exit 1
+cd "${BUILD_DIR}/lept" || exit 1
+dpkg -i libleptonica-dev_*.deb libleptonica6_*_amd64.deb || exit 1
+########## build tesseract ##########
 cd "${REPS_DIR}" || exit 1
 test -d "${REPS_DIR}/lang" || mkdir -p "${REPS_DIR}/lang"
 cd "${REPS_DIR}/lang" || exit 1

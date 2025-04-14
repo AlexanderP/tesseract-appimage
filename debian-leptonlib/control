@@ -1,0 +1,64 @@
+Source: leptonlib
+Priority: optional
+Maintainer: Jeff Breidenbach <jab@debian.org>
+Build-Depends: debhelper (>= 12.0.0), libtiff-dev, libpng-dev, libgif-dev (>= 4.1.6), libwebp-dev (>= 0.4.0), libopenjp2-7-dev, automake, pkg-config, gnuplot-nox <!nocheck>
+Standards-Version: 4.6.0
+Homepage: http://www.leptonica.org
+Section: graphics
+
+Package: libleptonica-dev
+Section: libdevel
+Architecture: any
+Depends: libleptonica6 (= ${binary:Version}), ${misc:Depends}
+Description: image processing library
+ Well-tested C library for some basic image processing operations,
+ along with a description of the functions and some design methods. A
+ full set of affine transformations (translation, shear, rotation,
+ scaling) on images of all depths is included, with the exception that
+ some of the scaling methods do not work at all depths. There are also
+ implementations of binary morphology, grayscale morphology,
+ convolution and rank order filters, and applications such as jbig2
+ image processing and color quantization. You will also find basic
+ utilities for the safe and efficient handling of arrays (of strings,
+ numbers, number pairs and image-related geometrical objects), byte
+ queues, generic stacks, generic lists, and endian-independent
+ indexing into 32-bit arrays.
+
+Package: libleptonica6
+Section: libs
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Breaks: libleptonica (>= 1.69~)
+Replaces: libleptonica (>= 1.69~)
+Description: image processing library
+ Well-tested C library for some basic image processing operations,
+ along with a description of the functions and some design methods. A
+ full set of affine transformations (translation, shear, rotation,
+ scaling) on images of all depths is included, with the exception that
+ some of the scaling methods do not work at all depths. There are also
+ implementations of binary morphology, grayscale morphology,
+ convolution and rank order filters, and applications such as jbig2
+ image processing and color quantization. You will also find basic
+ utilities for the safe and efficient handling of arrays (of strings,
+ numbers, number pairs and image-related geometrical objects), byte
+ queues, generic stacks, generic lists, and endian-independent
+ indexing into 32-bit arrays.
+
+Package: leptonica-progs
+Section: graphics
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: sample programs for Leptonica image processing library
+ Well-tested C library for some basic image processing operations,
+ along with a description of the functions and some design methods. A
+ full set of affine transformations (translation, shear, rotation,
+ scaling) on images of all depths is included, with the exception that
+ some of the scaling methods do not work at all depths. There are also
+ implementations of binary morphology, grayscale morphology,
+ convolution and rank order filters, and applications such as jbig2
+ image processing and color quantization. You will also find basic
+ utilities for the safe and efficient handling of arrays (of strings,
+ numbers, number pairs and image-related geometrical objects), byte
+ queues, generic stacks, generic lists, and endian-independent
+ indexing into 32-bit arrays.

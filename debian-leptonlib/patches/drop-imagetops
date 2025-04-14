@@ -1,0 +1,32 @@
+Description: Drop imagetops binary
+ imagetops is conflicting with a netpbm binary. And it isn't very
+ important. So dropping it.
+ .
+ leptonlib (1.78.0-1) unstable; urgency=medium
+ .
+   * Remove /usr/bin/imagetops (closes: #926313)
+Author: Jeff Breidenbach <jab@debian.org>
+Bug-Debian: https://bugs.debian.org/926313
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: vendor
+Bug-Debian: https://bugs.debian.org/926313
+Forwarded: not-needed
+Reviewed-By: Jeff Breidenbach <jab@debian.org>
+Last-Update: 2019-06-24
+
+--- leptonlib-1.78.0.orig/prog/Makefile.am
++++ leptonlib-1.78.0/prog/Makefile.am
+@@ -5,7 +5,7 @@ LDADD = $(top_builddir)/src/liblept.la $
+  
+ INSTALL_PROGS = convertfilestopdf convertfilestops \
+ 	convertformat convertsegfilestopdf convertsegfilestops \
+-	converttopdf converttops fileinfo imagetops xtractprotos
++	converttopdf converttops fileinfo xtractprotos
+ 
+ AUTO_REG_PROGS = adaptmap_reg adaptnorm_reg affine_reg alphaops_reg \
+ 	alphaxform_reg baseline_reg bilateral2_reg \

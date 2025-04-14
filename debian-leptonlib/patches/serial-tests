@@ -1,0 +1,17 @@
+Description: Run tests serially
+ Leptonica tests suite is not threadsafe.
+---
+Origin: vendor
+Bug: https://github.com/DanBloomberg/leptonica/issues/472
+Forwarded: not-needed
+Reviewed-By: Jeff Breidenbach jab@debian.org
+Last-Update: 2020-01-04
+
+--- leptonlib-1.79.0.orig/prog/Makefile.am
++++ leptonlib-1.79.0/prog/Makefile.am
+@@ -1,4 +1,4 @@
+-AUTOMAKE_OPTIONS = parallel-tests
++AUTOMAKE_OPTIONS = serial-tests
+ AM_CPPFLAGS = -I$(top_srcdir)/src -I$(top_builddir)/src
+ LDADD = $(top_builddir)/src/libleptonica.la $(LIBM)
+  
