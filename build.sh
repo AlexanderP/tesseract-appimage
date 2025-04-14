@@ -82,14 +82,7 @@ done
 
 cd "${DIR}/tesseract" || exit 1
 
-case ${VERSION} in
-    4*)
-        _TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00
-    ;;
-    *)
-        _TESSDATA_PREFIX=/usr/share/tesseract-ocr/5
-    ;;
-esac
+_TESSDATA_PREFIX=/usr/share/tesseract-ocr/5
 
 if [[ ${BUILD} == "False" ]]
 then
@@ -113,16 +106,8 @@ fi
 
 TESSDATA_PREFIX=${REPS_DIR}/lang
 export TESSDATA_PREFIX
-case ${VERSION} in
-    4*)
-        ./src/api/tesseract -v || exit 1
-        ./src/api/tesseract ./test/testing/phototest.tif - || exit 1
-    ;;
-    *)
-        ./tesseract -v || exit 1
-        ./tesseract ./test/testing/phototest.tif - || exit 1
-    ;;
-esac
+./tesseract -v || exit 1
+./tesseract ./test/testing/phototest.tif - || exit 1
 unset TESSDATA_PREFIX
 
 
