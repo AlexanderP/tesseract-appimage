@@ -1,9 +1,9 @@
 FROM debian:trixie
 
 RUN apt update
-RUN DEBIAN_FRONTEND=noninteractive apt install -y patchelf desktop-file-utils debhelper libleptonica-dev automake libtool libarchive-dev libpango1.0-dev libcairo2-dev libicu-dev libpng-dev libjpeg-dev libtiff-dev zlib1g-dev git asciidoc xsltproc docbook-xsl docbook-xml wget libfuse2 fuse
+RUN DEBIAN_FRONTEND=noninteractive apt install -y patchelf desktop-file-utils debhelper libleptonica-dev automake libtool libarchive-dev libpango1.0-dev libcairo2-dev libicu-dev libpng-dev libjpeg-dev libtiff-dev zlib1g-dev git asciidoc xsltproc docbook-xsl docbook-xml wget libfuse2 fuse devscripts
 
-RUN DEBIAN_FRONTEND=noninteractive apt install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf2.0-dev fakeroot wget
+RUN DEBIAN_FRONTEND=noninteractive apt install -y python3-pip python3-setuptools patchelf desktop-file-utils libgdk-pixbuf-xlib-2.0-dev fakeroot wget libgif-dev libopenjp2-7-dev gnuplot-nox
 RUN wget https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage -O /usr/local/bin/appimagetool
 RUN chmod +x /usr/local/bin/appimagetool
 
