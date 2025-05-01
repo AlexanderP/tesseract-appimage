@@ -81,7 +81,7 @@ tar -cpf "leptonlib_${VERSION_LEPTONICA}.orig.tar" "leptonlib-${VERSION_LEPTONIC
 xz -9 "leptonlib_${VERSION_LEPTONICA}.orig.tar"
 cp -r "${DIR}/debian-leptonlib" "${BUILD_DIR}/lept/leptonlib-${VERSION_LEPTONICA}/debian"
 cd "${BUILD_DIR}/lept/leptonlib-${VERSION_LEPTONICA}" || exit 1
-debuild || exit 1
+debuild -i -us -uc -b || exit 1
 cd "${BUILD_DIR}/lept" || exit 1
 dpkg -i libleptonica-dev_*.deb libleptonica6_*_amd64.deb || exit 1
 ########## build tesseract ##########
@@ -116,14 +116,14 @@ else
                 LDFLAGS="-lleptonica -Wl,-z,defs $(dpkg-buildflags --get LDFLAGS)"
     make -j10
 fi
-
+########## test tesseract ##########
 TESSDATA_PREFIX=${REPS_DIR}/lang
 export TESSDATA_PREFIX
 ./tesseract -v || exit 1
 ./tesseract ./test/testing/phototest.tif - || exit 1
 unset TESSDATA_PREFIX
 
-
+########## create AppImage ##########
 test ! -d AppDir || rm -rf AppDir
 make install DESTDIR="$(pwd)/AppDir"
 
