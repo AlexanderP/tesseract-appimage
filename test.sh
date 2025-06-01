@@ -8,6 +8,7 @@ blue() { echo -e "\\e[1;34m$1\\e[0;39;49m"; }
 green_n() { echo -en "\\e[1;32m$1\\e[0;39;49m"; }
 DIST=("almalinux_8" \
       "almalinux_9" \
+      "almalinux_10" \
       "alt_p10" \
       "alt_p11" \
       "debian_10" \
@@ -18,6 +19,7 @@ DIST=("almalinux_8" \
       "fedora_39" \
       "fedora_40" \
       "fedora_41" \
+      "fedora_42" \
       "ubuntu_14.04" \
       "ubuntu_16.04" \
       "ubuntu_18.04" \
@@ -25,6 +27,7 @@ DIST=("almalinux_8" \
       "ubuntu_22.04" \
       "ubuntu_24.04" \
       "ubuntu_24.10" \
+      "ubuntu_25.04" \
       "opensuse_15.3" \
       "opensuse_15.4" \
       "opensuse_15.5"\
