@@ -25,7 +25,7 @@ LANG_TESSDATA=("afr" "amh" "ara" "asm" "aze_cyrl" "aze" "bel" "ben" "bod" \
                "tat" "tel" "tgk" "tha" "tir" "ton" "tur" "uig" "ukr" "urd" \
                "uzb_cyrl" "uzb" "vie" "yid" "yor")
 INSTALL_TESSDATA=("eng" "osd")
-export VERSION=5.5.1_lept6
+export VERSION=5.5.2_lept6
 
 get_tessdata(){
     if test ! -f "${1}.traineddata"
