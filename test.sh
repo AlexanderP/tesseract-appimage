@@ -11,7 +11,6 @@ DIST=("almalinux_8" \
       "almalinux_10" \
       "alt_p10" \
       "alt_p11" \
-      "debian_10" \
       "debian_11" \
       "debian_12" \
       "debian_13" \
@@ -26,18 +25,21 @@ DIST=("almalinux_8" \
       "ubuntu_20.04" \
       "ubuntu_22.04" \
       "ubuntu_24.04" \
-      "ubuntu_24.10" \
       "ubuntu_25.04" \
       "opensuse_15.3" \
       "opensuse_15.4" \
       "opensuse_15.5"\
       "opensuse_15.6"\
-      "opensuse_tumbleweed" )
+      "opensuse_tumbleweed"\
+      "archlinux" \
+      "fedora_43" \
+      "opensuse_16.0" \
+    )
 PICTURE="Apache.gif Apache.jpg Apache.png Apache.tif Apache.webp"
 
 create_images(){
     for _images in "${DIST[@]}" ; do
-        if docker images | grep -q "${_images}"
+        if docker images | grep -q "tess_${_images}"
         then
             green "Образ ${_images} создан"
         else
