@@ -1,9 +1,9 @@
-leptonlib (1.85.0-1) unstable; urgency=medium
+leptonlib (1.87.0-1) unstable; urgency=medium
 
   * Non-maintainer upload.
   * New upstream release
 
- -- Alexander Pozdnyakov <almipo@mail.ru>  Thu, 06 Mar 2025 19:57:59 +0000
+ -- Alexander Pozdnyakov <almipo@mail.ru>  Sun, 28 Dec 2025 14:57:59 +0000
 
 leptonlib (1.84.1-4) unstable; urgency=medium
 
