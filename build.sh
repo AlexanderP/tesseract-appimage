@@ -161,7 +161,7 @@ cp "${DIR}/tesseract.png" "AppDir"
 
 
 cat >> "AppDir/AppRun" << EOF
-#!/bin/bash
+#!/bin/sh
 HERE="\$(dirname "\$(readlink -f "\${0}")")"
 
 if [ -z "\$TESSDATA_PREFIX" ]; then
